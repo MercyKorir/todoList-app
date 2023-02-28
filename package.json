@@ -22,7 +22,8 @@
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.7.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vercel": "^28.16.7"
   },
   "devDependencies": {
     "@types/node": "18.14.1",
