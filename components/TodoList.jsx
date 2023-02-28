@@ -1,15 +1,16 @@
-import { useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import useAuth from "../pages/hooks/useAuth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { firebaseDB } from "../firebase-config";
 import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
 import { deleteTodo, toggleTodoStatus } from "../pages/api/todo";
+import { getAuth } from "firebase/auth";
+import { firebaseApp } from "../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-  const { user } = useAuth();
-  const toast = useToast();
+  const firebaseAuth = getAuth(firebaseApp);
+  const [user] = useAuthState(firebaseAuth);
   const refreshData = () => {
     if (!user) {
       setTodos([]);
@@ -33,20 +34,16 @@ function TodoList() {
   const handleTodoDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
       deleteTodo(id);
-      toast({ title: "Todo deleted successfully", status: "success" });
+      console.log("Task deleted successfully");
     }
   };
   const handleToggle = async (id, status) => {
     const newStatus = status == "completed" ? "pending" : "completed";
     await toggleTodoStatus({ docId: id, status: newStatus });
-    toast({
-      title: `Todo marked ${newStatus}`,
-      status: newStatus == "completed" ? "success" : "warning",
-    });
+    console.log("Status updated Successfully");
   };
 
   const [search, setSearch] = useState("");
-  console.log(search);
 
   return (
     <div className="mt-8 w-10/12 ml-20 h-auto flex flex-col">

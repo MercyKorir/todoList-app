@@ -1,24 +1,20 @@
 import React from "react";
 import { useState } from "react";
-import { useToast } from "@chakra-ui/react";
-import useAuth from "../pages/hooks/useAuth";
 import { addTodo } from "../pages/api/todo";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseApp } from "../firebase-config";
+import { getAuth } from "firebase/auth";
 
 function AddTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("pending");
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
-  const { isLoggedIn, user } = useAuth();
+  const firebaseAuth = getAuth(firebaseApp);
+  const [user] = useAuthState(firebaseAuth);
   const handleTodoCreate = async () => {
-    if (!isLoggedIn) {
-      toast({
-        title: "You must be logged in to create a todo",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
+    if (!user) {
+      console.log("You must be logged in to continue");
       return;
     }
     setIsLoading(true);
@@ -33,7 +29,7 @@ function AddTodo() {
     setTitle("");
     setDescription("");
     setStatus("pending");
-    toast({ title: "Todo created successfully", status: "success" });
+    console.log("Task created successfully");
   };
 
   return (
@@ -56,10 +52,16 @@ function AddTodo() {
           onChange={(e) => setStatus(e.target.value)}
           className="text-gray-900 rounded-sm mb-3 w-1/3 p-2"
         >
-          <option value={"pending"} className="text-yellow-400 font-bold cursor-pointer">
+          <option
+            value={"pending"}
+            className="text-yellow-400 font-bold cursor-pointer"
+          >
             Pending
           </option>
-          <option value={"completed"} className="text-green-500 font-bold cursor-pointer">
+          <option
+            value={"completed"}
+            className="text-green-500 font-bold cursor-pointer"
+          >
             Completed
           </option>
         </select>
