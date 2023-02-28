@@ -7,7 +7,7 @@ import useAuth from "../pages/hooks/useAuth";
 function Auth() {
   const firebaseAuth = getAuth(firebaseApp);
   /*const { toggleColorMode, colorMode } = useColorMode();*/
-  const { isLoggedIn, user } = useAuth();
+  const [isLoggedIn, user] = useAuth();
   const handleAuth = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(firebaseAuth, provider)
