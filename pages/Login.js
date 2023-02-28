@@ -1,13 +1,10 @@
 import React from "react";
-import { useState } from "react";
 import { firebaseApp } from "../firebase-config";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 
-function login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login() {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
   const [user, loading] = useAuthState(firebaseAuth);
@@ -45,4 +42,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
