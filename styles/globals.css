@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap");
 html,
 body {
-  @apply overflow-x-hidden font-sans bg-[#111827];
+  @apply overflow-x-hidden font-sans bg-[#111827] scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-rose-500 scrollbar-track-slate-700;
 }
