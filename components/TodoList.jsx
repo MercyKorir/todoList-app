@@ -58,7 +58,7 @@ function TodoList() {
             .filter((todo) => {
               return search.toLowerCase() === ""
                 ? todo
-                : todo.status.toLowerCase().includes(search);
+                : todo.status.toLowerCase().includes(search.toLowerCase());
             })
             .map((todo) => (
               <div className="w-auto p-5 shadow-xl shadow-slate-400 transition ease-in-out delay-200 hover:shadow-2xl h-auto overflow-auto">
