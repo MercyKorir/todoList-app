@@ -20,7 +20,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-7xl pb-20 pt-40 font-sans">
+    <div className="max-w-7xl pb-20 pt-40 max-sm:pt-36 xl:pt-64 font-sans">
       <Auth />
       <AddTodo />
       <TodoList />
