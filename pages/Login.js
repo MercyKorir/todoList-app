@@ -20,7 +20,6 @@ function Login() {
 
   const loginGoogle = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(response.user);
   };
 
   return (
